@@ -1,0 +1,125 @@
+/* ── Split-image rack focus ─────────────────────────────── */
+
+.vf .vf-rf {
+  --o: 36;
+  --b: 8;
+  --g: 1;
+  position: relative;
+  display: block;
+  color: var(--vf-chrome);
+}
+
+.vf .vf-rf__stack {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: top;
+}
+
+.vf .vf-rf__sizer {
+  display: block;
+  visibility: hidden;
+}
+
+.vf .vf-rf__half {
+  position: absolute;
+  inset: 0;
+  display: block;
+  will-change: transform, filter;
+  -webkit-mask-size: 100% 1lh;
+  mask-size: 100% 1lh;
+  -webkit-mask-repeat: repeat-y;
+  mask-repeat: repeat-y;
+  filter: blur(calc(var(--b) * 1px));
+}
+
+/* the split sits on the optical middle of the capitals, not the line box */
+.vf .vf-rf__half--top {
+  -webkit-mask-image: linear-gradient(to bottom, #000 0 54%, transparent 54% 100%);
+  mask-image: linear-gradient(to bottom, #000 0 54%, transparent 54% 100%);
+  transform: translate3d(calc(var(--o) * -1px), 0, 0);
+}
+.vf .vf-rf__half--bot {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0 54%, #000 54% 100%);
+  mask-image: linear-gradient(to bottom, transparent 0 54%, #000 54% 100%);
+  transform: translate3d(calc(var(--o) * 1px), 0, 0);
+  opacity: 0.94;
+}
+
+/* the hairline of the prism edge, on every line */
+.vf .vf-rf__seam {
+  position: absolute;
+  inset: 0 -28px;
+  pointer-events: none;
+  opacity: calc(var(--g) * 0.55);
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 calc(0.54lh - 0.5px),
+    rgba(236, 235, 230, 0.5) calc(0.54lh - 0.5px) calc(0.54lh + 0.5px),
+    transparent calc(0.54lh + 0.5px) 1lh
+  );
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+/* the click: last hair of travel snaps home with a detent overshoot */
+.vf .vf-rf.is-sharp .vf-rf__half {
+  transform: translate3d(0, 0, 0);
+  filter: blur(0);
+  opacity: 1;
+  visibility: hidden;
+  transition:
+    transform 0.42s var(--vf-detent),
+    filter 0.18s ease-out,
+    opacity 0.2s,
+    visibility 0s linear 0.46s;
+}
+/* once it has clicked home, hand over to the real glyphs (no seam, crisp AA) */
+.vf .vf-rf.is-sharp .vf-rf__sizer {
+  visibility: visible;
+  transition: visibility 0s linear 0.46s;
+}
+.vf .vf-rf.is-sharp .vf-rf__seam {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.vf .vf-rf.is-static .vf-rf__half,
+.vf .vf-rf.is-static .vf-rf__sizer {
+  transition: none;
+  will-change: auto;
+}
+
+/* focus confirmation: two orange brackets blink once */
+.vf .vf-rf::before,
+.vf .vf-rf::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 0 solid var(--vf-hot);
+  opacity: 0;
+  pointer-events: none;
+}
+.vf .vf-rf::before {
+  top: -10px;
+  left: -14px;
+  border-top-width: 1.5px;
+  border-left-width: 1.5px;
+}
+.vf .vf-rf::after {
+  bottom: -2px;
+  left: -14px;
+  border-bottom-width: 1.5px;
+  border-left-width: 1.5px;
+}
+.vf .vf-rf.is-sharp:not(.is-static)::before,
+.vf .vf-rf.is-sharp:not(.is-static)::after {
+  animation: vf-confirm 0.9s steps(1, end) 0.12s 1;
+}
+@keyframes vf-confirm {
+  0% { opacity: 1; }
+  22% { opacity: 0; }
+  36% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { opacity: 0; }
+}

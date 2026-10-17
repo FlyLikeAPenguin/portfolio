@@ -1,0 +1,331 @@
+/* ───────────────────────── VIEWFINDER · base ─────────────────────────
+   Everything is scoped under .vf. One hot accent, used sparingly. */
+
+.vf {
+  --vf-body: #0c0c0c;
+  --vf-panel: #141414;
+  --vf-panel-2: #1a1a19;
+  --vf-chrome: #ecebe6;
+  --vf-chrome-dim: rgba(236, 235, 230, 0.74);
+  --vf-engr: #8a8a85;
+  --vf-hair: rgba(236, 235, 230, 0.14);
+  --vf-hair-strong: rgba(236, 235, 230, 0.26);
+  --vf-hot: #ff5a1f;
+  --vf-hot-soft: rgba(255, 90, 31, 0.16);
+
+  --vf-sans: 'Archivo Variable', 'Archivo', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --vf-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* mechanical easings */
+  --vf-ease: cubic-bezier(0.2, 0.7, 0.1, 1);
+  --vf-ease-io: cubic-bezier(0.7, 0, 0.2, 1);
+  --vf-detent: cubic-bezier(0.34, 1.7, 0.6, 1);
+
+  --vf-gutter: clamp(20px, 5vw, 76px);
+  --vf-max: 1320px;
+
+  position: relative;
+  min-height: 100vh;
+  background: var(--vf-body);
+  color: var(--vf-chrome);
+  font-family: var(--vf-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  font-variation-settings: 'wdth' 100;
+  font-feature-settings: 'ss01' 0;
+  overflow-x: clip;
+}
+
+.vf ::selection {
+  background: var(--vf-hot);
+  color: #0c0c0c;
+}
+
+.vf a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.vf :focus-visible {
+  outline: 1px solid var(--vf-hot);
+  outline-offset: 4px;
+}
+
+.vf img {
+  max-width: 100%;
+}
+
+.vf p {
+  margin: 0;
+}
+
+.vf h1,
+.vf h2,
+.vf h3,
+.vf h4 {
+  margin: 0;
+  font-weight: inherit;
+}
+
+.vf ul,
+.vf ol,
+.vf dl,
+.vf dd {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vf .vf-sr {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.vf .vf-skip {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  z-index: 300;
+  transform: translate(-50%, -160%);
+  padding: 10px 16px;
+  background: var(--vf-chrome);
+  color: var(--vf-body);
+  font: 600 12px/1 var(--vf-sans);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: transform 0.3s var(--vf-ease);
+}
+.vf .vf-skip:focus {
+  transform: translate(-50%, 0);
+}
+
+/* ── type ─────────────────────────────────────────────────── */
+
+/* engraved: like the lettering on a top plate. Wide, small, tracked, grey. */
+.vf .vf-engr {
+  font-family: var(--vf-sans);
+  font-variation-settings: 'wdth' 125;
+  font-weight: 500;
+  font-size: 10.5px;
+  line-height: 1.4;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--vf-engr);
+}
+
+.vf .vf-mono {
+  font-family: var(--vf-mono);
+  font-feature-settings: 'zero' 1, 'tnum' 1;
+}
+
+.vf .vf-display {
+  font-family: var(--vf-sans);
+  font-variation-settings: 'wdth' 62;
+  font-weight: 820;
+  text-transform: uppercase;
+  line-height: 0.86;
+  letter-spacing: -0.005em;
+}
+
+.vf .vf-lede {
+  font-size: clamp(19px, 1.7vw, 24px);
+  line-height: 1.38;
+  font-weight: 400;
+  color: var(--vf-chrome);
+  letter-spacing: -0.006em;
+  text-wrap: pretty;
+}
+
+.vf .vf-body {
+  font-size: 16px;
+  line-height: 1.62;
+  color: var(--vf-chrome-dim);
+  text-wrap: pretty;
+}
+
+/* ── layout ───────────────────────────────────────────────── */
+
+.vf .vf-wrap {
+  width: 100%;
+  max-width: calc(var(--vf-max) + var(--vf-gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--vf-gutter);
+}
+
+.vf .vf-section {
+  position: relative;
+  padding-block: clamp(110px, 14vw, 200px) clamp(96px, 11vw, 160px);
+}
+
+.vf .vf-section + .vf-section {
+  border-top: 1px solid var(--vf-hair);
+}
+
+/* Section header: engraved meta line, then the big split-focus title. */
+.vf .vf-sh {
+  margin-bottom: clamp(48px, 6vw, 88px);
+}
+.vf .vf-sh__meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: clamp(18px, 2.4vw, 30px);
+}
+.vf .vf-sh__rule {
+  flex: 1;
+  height: 1px;
+  background: var(--vf-hair);
+}
+.vf .vf-sh__no {
+  color: var(--vf-chrome);
+}
+.vf .vf-sh__speed {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.vf .vf-sh__speed b {
+  font-weight: 500;
+  color: var(--vf-chrome);
+}
+.vf .vf-sh__title {
+  font-size: clamp(64px, 12.4vw, 196px);
+}
+
+/* Engraved pill button / link */
+.vf .vf-btn {
+  --bw: 118;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  height: 40px;
+  padding: 0 18px;
+  border: 1px solid var(--vf-hair-strong);
+  border-radius: 999px;
+  font-family: var(--vf-sans);
+  font-variation-settings: 'wdth' var(--bw);
+  font-weight: 560;
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--vf-chrome);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0));
+  transition:
+    font-variation-settings 0.5s var(--vf-ease),
+    border-color 0.3s,
+    background-color 0.3s,
+    color 0.3s;
+}
+.vf .vf-btn:hover {
+  --bw: 125;
+  border-color: var(--vf-chrome);
+}
+.vf .vf-btn svg {
+  width: 10px;
+  height: 10px;
+  transition: transform 0.4s var(--vf-ease);
+}
+.vf .vf-btn:hover svg {
+  transform: translate(2px, -2px);
+}
+.vf .vf-btn--hot {
+  background: var(--vf-hot);
+  border-color: var(--vf-hot);
+  color: #0c0c0c;
+}
+.vf .vf-btn--hot:hover {
+  border-color: var(--vf-hot);
+}
+
+/* Viewfinder frame: corner brackets around an element */
+.vf .vf-frame {
+  position: relative;
+}
+.vf .vf-frame__br {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: var(--vf-chrome);
+  border-style: solid;
+  border-width: 0;
+  pointer-events: none;
+  opacity: 0.85;
+  z-index: 2;
+}
+.vf .vf-frame__br--tl {
+  top: -10px;
+  left: -10px;
+  border-top-width: 1px;
+  border-left-width: 1px;
+}
+.vf .vf-frame__br--tr {
+  top: -10px;
+  right: -10px;
+  border-top-width: 1px;
+  border-right-width: 1px;
+}
+.vf .vf-frame__br--bl {
+  bottom: -10px;
+  left: -10px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+}
+.vf .vf-frame__br--br {
+  bottom: -10px;
+  right: -10px;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+}
+
+/* EXIF-style metadata row */
+.vf .vf-exif {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 22px;
+  row-gap: 6px;
+  padding-block: 12px;
+  border-top: 1px solid var(--vf-hair);
+  border-bottom: 1px solid var(--vf-hair);
+}
+.vf .vf-exif > span {
+  display: inline-flex;
+  gap: 10px;
+  align-items: baseline;
+  white-space: nowrap;
+}
+.vf .vf-exif em {
+  font-style: normal;
+}
+.vf .vf-exif b {
+  font-family: var(--vf-mono);
+  font-weight: 500;
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+  color: var(--vf-chrome);
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .vf .vf-sh__meta {
+    gap: 10px;
+  }
+  .vf .vf-sh__speed {
+    display: none;
+  }
+  .vf .vf-sh__title {
+    font-size: clamp(46px, 15.5vw, 96px);
+  }
+  .vf .vf-engr {
+    font-size: 9.5px;
+    letter-spacing: 0.2em;
+  }
+}
