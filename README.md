@@ -1,5 +1,7 @@
 # Joe Thornton · portfolio
 
+**Live: https://flylikeapenguin.github.io/portfolio/**
+
 A one-page portfolio styled as a satellite ground station. Scroll flies a satellite around a 3D
 night-side Earth, and each project is a "pass" over a ground station: signal acquired, telemetry
 in, images downlinked line by line.
@@ -51,14 +53,12 @@ down the page (add `--mobile` for a phone viewport). Run `npx playwright install
 
 ## Deploying
 
-The build is static with relative paths, so `dist/` works on any host or sub-path.
+Every push to `main` builds and deploys to GitHub Pages via `.github/workflows/deploy.yml`
+(Settings → Pages → Source: GitHub Actions). You can also run the *Deploy* workflow by hand.
 
-- **GitHub Pages:** in the repo settings choose Pages → Source → GitHub Actions, then run the
-  *Deploy* workflow. Pages on a private repo needs a paid GitHub plan; on a public repo it's free.
-  To deploy on every push to `main`, uncomment the `push` trigger in `.github/workflows/deploy.yml`.
-- **Cloudflare Pages / Netlify / Vercel:** build command `pnpm build`, output directory `dist`.
-
-Once the final domain is known, make `og:image` in `index.html` an absolute URL so link previews work.
+The build is static with relative paths, so `dist/` also works on any other host or sub-path
+(Cloudflare Pages, Netlify, Vercel: build command `pnpm build`, output `dist`). If the address
+changes, update `og:url`, `og:image` and the canonical link in `index.html`.
 
 ## Credits
 

@@ -1,10 +1,10 @@
 name: Deploy
 
-# Manual for now. To deploy on every push to main, uncomment the push trigger.
+# Deploys to GitHub Pages (https://flylikeapenguin.github.io/portfolio/) on every push to main.
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
-  # push:
-  #   branches: [main]
 
 permissions:
   contents: read
