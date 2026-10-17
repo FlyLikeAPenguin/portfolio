@@ -38,7 +38,7 @@ For each original this writes a 720px thumbnail (`public/photos/thumb/`) and a 2
 viewer (`public/photos/full/`) as WebP, with EXIF and GPS removed. It also updates
 `src/content/photos.json`: camera, lens and settings come from EXIF; titles, order and crop (`pos`)
 are yours to edit there and survive re-runs. New photos are added at the end, titled with their file
-name. Film scans are detected and credited to the OM-1. The first photo in the list is the large
+name. Film scans are detected and credited to the OM-1 (50mm, Kodak Gold 200). The first photo in the list is the large
 tile, the first 17 show on the page and the rest sit behind "Show all".
 
 ## Code layout

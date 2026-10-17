@@ -70,7 +70,7 @@ export function Optical() {
                       <span>
                         {ph.kind === 'film' ? 'Film' : 'Digital'} · {ph.camera}
                       </span>
-                      {ph.settings ? <span>{ph.settings}</span> : null}
+                      {ph.settings || ph.stock ? <span>{[ph.settings, ph.stock].filter(Boolean).join(' · ')}</span> : null}
                       {date ? <span>{date}</span> : null}
                     </span>
                   </div>

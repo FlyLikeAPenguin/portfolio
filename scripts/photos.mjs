@@ -10,6 +10,7 @@
 // The manifest keeps your edits: titles, order, crop position (`pos`) and anything else you add stay
 // as they are. Camera, lens, settings, date and size are refreshed from EXIF. New photos are appended
 // with their file name as the title, ready to rename. Order in the file is display order.
+// Film scans are credited to FILM_CAMERA with a FILM_LENS lens on FILM_STOCK, unless you set them by hand.
 import fs from 'node:fs'
 import path from 'node:path'
 import sharp from 'sharp'
@@ -19,6 +20,8 @@ const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..')
 const OUT = path.join(ROOT, 'public/photos')
 const MANIFEST = path.join(ROOT, 'src/content/photos.json')
 const FILM_CAMERA = 'Olympus OM-1'
+const FILM_STOCK = 'Kodak Gold 200'
+const FILM_LENS = '50mm'
 const THUMB_SHORT_EDGE = 720
 const FULL_LONG_EDGE = 2048
 
@@ -108,6 +111,10 @@ for (const f of files) {
   const meta = await readMeta(file)
   const prev = byId.get(id)
   const entry = { id, title: prev?.title ?? id, ...prev, ...meta, w, h }
+  if (entry.kind === 'film') {
+    entry.settings ??= FILM_LENS
+    entry.stock ??= FILM_STOCK
+  }
   for (const k of Object.keys(entry)) if (entry[k] === undefined) delete entry[k]
   if (prev) Object.assign(prev, entry)
   else {

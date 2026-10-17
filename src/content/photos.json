@@ -117,7 +117,9 @@
     "kind": "film",
     "camera": "Olympus OM-1",
     "w": 1358,
-    "h": 2048
+    "h": 2048,
+    "settings": "50mm",
+    "stock": "Kodak Gold 200"
   },
   {
     "id": "dsc09834",
@@ -237,7 +239,9 @@
     "camera": "Olympus OM-1",
     "w": 2048,
     "h": 1358,
-    "pos": "50% 50%"
+    "pos": "50% 50%",
+    "settings": "50mm",
+    "stock": "Kodak Gold 200"
   },
   {
     "id": "dsc03423-2",
@@ -325,7 +329,9 @@
     "kind": "film",
     "camera": "Olympus OM-1",
     "w": 1358,
-    "h": 2048
+    "h": 2048,
+    "settings": "50mm",
+    "stock": "Kodak Gold 200"
   },
   {
     "id": "dsc00822",

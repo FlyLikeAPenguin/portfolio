@@ -11,8 +11,10 @@ export type Photo = {
   kind: 'film' | 'digital'
   camera: string
   lens?: string
-  /** "300mm · f/8 · 1/250 · ISO 200", from EXIF. */
+  /** "300mm · f/8 · 1/250 · ISO 200", from EXIF. Film scans: the focal length. */
   settings?: string
+  /** Film stock, for film scans. */
+  stock?: string
   /** "2026-08". Film scans have none: their EXIF date is the scan, not the shot. */
   date?: string
   /** Size of the full image. */

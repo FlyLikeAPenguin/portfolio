@@ -21,7 +21,7 @@ export const profile = {
   /** Kit, for the photography section. Mostly digital; film is occasional. */
   cameras: [
     { name: 'Sony ZV-E10', kind: 'Digital', detail: 'Most of what I shoot. Sigma 30mm and 56mm f/1.4, Tamron 18–300mm.' },
-    { name: 'Olympus OM-1', kind: 'Film', detail: '35mm SLR from 1972, for the occasional roll.' },
+    { name: 'Olympus OM-1', kind: 'Film', detail: '35mm SLR from 1972 with a 50mm lens, for the occasional roll of Kodak Gold 200.' },
   ],
 }
 

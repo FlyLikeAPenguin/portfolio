@@ -118,7 +118,7 @@ export default function Lightbox({ photos, index, onIndex, onClose }: Props) {
         <figcaption className="gs-lb__cap">
           <b>{ph.title}</b>
           <span>{gear}</span>
-          {ph.settings || date ? <span>{[ph.settings, date].filter(Boolean).join(' · ')}</span> : null}
+          {ph.settings || ph.stock || date ? <span>{[ph.settings, ph.stock, date].filter(Boolean).join(' · ')}</span> : null}
         </figcaption>
       </figure>
 
