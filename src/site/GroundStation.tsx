@@ -23,7 +23,8 @@ import Hud from './ui/Hud'
 import Marks from './ui/Marks'
 import Hero from './sections/Hero'
 import { PassCountdown, PassGenki, PassNitpick, PassQuibble, PassSatboard, Transit } from './sections/Passes'
-import { Contact, Ground, Optical } from './sections/Tail'
+import { Optical } from './sections/Optical'
+import { Contact, Ground } from './sections/Tail'
 
 const p2 = (n: number) => String(n).padStart(2, '0')
 const CHIP = { wait: 'Awaiting signal', aos: 'AOS · Signal acquired', los: 'LOS · Loss of signal' } as const

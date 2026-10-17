@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { asset, currentJob, dayJob, orbitPhotos, previousJob, profile, skyPhotos, timeline } from '../../content'
+import { currentJob, dayJob, previousJob, profile, timeline } from '../../content'
 import { PASS_STATIONS } from '../plan'
-import Downlink from '../ui/Downlink'
 import { Arrow, ExtLink, PassHeader, Readout, SecHead } from '../ui/bits'
 import { Tags } from './Passes'
 
@@ -127,64 +126,6 @@ export function Ground() {
           </table>
         </div>
         </div>
-      </div>
-    </section>
-  )
-}
-
-/* ─────────────────────────────── payload: optical ─────────────────────────────── */
-
-export function Optical() {
-  const photos = [...skyPhotos.slice(1, 2), ...skyPhotos.slice(0, 1), ...skyPhotos.slice(2), ...orbitPhotos]
-  return (
-    <section className="gs-optical" id="gs-optical" data-shot="opt" data-sec="08" data-sec-label="Payload · Optical" aria-labelledby="gs-optical-h">
-      <div className="gs-wrap">
-        <SecHead n="08" aside="Imaging mode">
-          Payload · optical
-        </SecHead>
-        <div className="gs-optical__head">
-          <h2 className="gs-h2" id="gs-optical-h" data-scr>
-            Ground-based optical
-          </h2>
-          <div className="gs-optical__cap">
-            <p>{profile.bio[2]}</p>
-            <ul className="gs-cams">
-              {profile.cameras.map((c) => (
-                <li key={c.name}>
-                  <span className="gs-label">{c.kind}</span>
-                  <b>{c.name}</b>
-                  <span>{c.detail}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-        <ul className="gs-tiles">
-          {photos.map((ph, i) => {
-            const r = Math.floor(i / 5)
-            const c = i % 5
-            return (
-              <li key={ph.src} className={`gs-tile ${i === 0 ? 'gs-tile--xl' : ''}`}>
-                <Downlink src={asset(ph.src)} alt={ph.title} frame={`TILE R${p2(r + 1)}·C${p2(c + 1)}`} name={ph.title.toUpperCase()} ratio={1} seed={i + 17} className="gs-dl--tile">
-                  <div className="gs-tile__over">
-                    <span className="gs-tile__cross" aria-hidden="true" />
-                    <span className="gs-tile__exif">
-                      <b>{ph.title}</b>
-                      <span>
-                        {ph.kind === 'film' ? 'Film' : 'Digital'} · {ph.stock}
-                      </span>
-                      <span>{ph.settings}</span>
-                      <a href={ph.credit.url} target="_blank" rel="noreferrer">
-                        © {ph.credit.author}
-                      </a>
-                    </span>
-                  </div>
-                </Downlink>
-              </li>
-            )
-          })}
-        </ul>
-        <p className="gs-note">Placeholder frames, credited on hover, standing in for Joe’s own photography.</p>
       </div>
     </section>
   )

@@ -23,13 +23,23 @@ Everything the page says lives in [`src/content/`](src/content):
 |---|---|
 | `profile.ts` | Name, role, bio lines, links, cameras, career timeline |
 | `projects.ts` | Projects (copy, stats, links, gallery), current/previous role, the Axelspace chapter |
-| `photos.ts` | Night-sky and orbit photos, Earth textures |
+| `photos.json` | Photos: titles, order, crop and EXIF (see below) |
 
 Images live in `public/` and are referenced by path relative to it (`projects/quibble/shot-bingo.webp`).
 Each gallery image carries its pixel size and alt text.
 
-**Photos:** the night-sky photos in `public/space/p*.webp` are placeholders from Unsplash. Replace
-the files and their entries in `photos.ts` (title, settings) with your own. The orbit photos are NASA.
+## Adding photos
+
+```bash
+pnpm photos ~/Pictures/portfolio      # a folder of original JPEGs (any size)
+```
+
+For each original this writes a 720px thumbnail (`public/photos/thumb/`) and a 2048px version for the
+viewer (`public/photos/full/`) as WebP, with EXIF and GPS removed. It also updates
+`src/content/photos.json`: camera, lens and settings come from EXIF; titles, order and crop (`pos`)
+are yours to edit there and survive re-runs. New photos are added at the end, titled with their file
+name. Film scans are detected and credited to the OM-1. The first photo in the list is the large
+tile, the first 17 show on the page and the rest sit behind "Show all".
 
 ## Code layout
 

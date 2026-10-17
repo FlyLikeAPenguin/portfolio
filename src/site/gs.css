@@ -1755,7 +1755,20 @@
 }
 
 .gs .gs-tile:not(.gs-tile--xl) .gs-dl--tile .gs-dl__view {
-  aspect-ratio: 1;
+  aspect-ratio: 4 / 5;
+}
+
+/* The whole tile opens the viewer. */
+.gs .gs-tile__open {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  cursor: zoom-in;
+}
+
+.gs .gs-tile__open:focus-visible {
+  outline: 1px solid var(--mint);
+  outline-offset: -4px;
 }
 
 .gs .gs-dl--tile .gs-dl__view::after {
@@ -1840,15 +1853,6 @@
   color: var(--mint);
 }
 
-.gs .gs-tile__exif a {
-  color: var(--muted);
-  pointer-events: auto;
-}
-
-.gs .gs-tile__exif a:hover {
-  color: var(--text);
-}
-
 .gs .gs-tile:hover .gs-tile__over,
 .gs .gs-tile:focus-within .gs-tile__over {
   opacity: 1;
@@ -1866,11 +1870,179 @@
   --bc: var(--mint);
 }
 
-.gs .gs-note {
-  margin-top: 14px;
-  font: 400 10.5px/1.4 var(--mono);
-  letter-spacing: 0.06em;
+.gs .gs-optical__foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* ───────── photo viewer ───────── */
+
+.gs .gs-lb {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr) 72px;
+  grid-template-rows: auto minmax(0, 1fr);
+  padding: 0 var(--gx) 20px;
+  background: var(--bg);
+  animation: gs-lb-in 0.25s var(--ease) both;
+}
+
+@keyframes gs-lb-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.gs .gs-lb__top {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--top);
+  font: 400 10.5px/1 var(--mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: var(--muted);
+}
+
+.gs .gs-lb__count b {
+  font-weight: 400;
+  color: var(--mint);
+}
+
+.gs .gs-lb__close {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid var(--hair2);
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: var(--text);
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.gs .gs-lb__close:hover {
+  border-color: var(--mint);
+  color: var(--mint);
+}
+
+.gs .gs-lb__fig {
+  grid-column: 2;
+  grid-row: 2;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 16px;
+  min-height: 0;
+  margin: 0;
+}
+
+.gs .gs-lb__img {
+  position: relative;
+  min-height: 0;
+}
+
+.gs .gs-lb__img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.gs .gs-lb__low {
+  filter: blur(6px);
+}
+
+.gs .gs-lb__full {
+  opacity: 0;
+  transition: opacity 0.35s var(--ease);
+}
+
+.gs .gs-lb__full[data-loaded='1'] {
+  opacity: 1;
+}
+
+.gs .gs-lb__cap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 6px 18px;
+  font: 400 11px/1.4 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text2);
+  text-align: center;
+}
+
+.gs .gs-lb__cap b {
+  font: 500 18px/1.2 var(--sans);
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: var(--text);
+}
+
+.gs .gs-lb__nav {
+  grid-row: 2;
+  align-self: center;
+  justify-self: center;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--hair2);
+  color: var(--text);
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.gs .gs-lb__nav svg {
+  width: 20px;
+  height: 20px;
+}
+
+.gs .gs-lb__nav--prev {
+  grid-column: 1;
+}
+
+.gs .gs-lb__nav--next {
+  grid-column: 3;
+}
+
+.gs .gs-lb__nav:hover {
+  border-color: var(--mint);
+  color: var(--mint);
+}
+
+.gs .gs-lb button:focus-visible {
+  outline: 1px solid var(--mint);
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .gs .gs-lb {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: 12px 0;
+  }
+  .gs .gs-lb__fig {
+    grid-column: 1 / -1;
+  }
+  .gs .gs-lb__nav {
+    grid-row: 3;
+  }
+  .gs .gs-lb__nav--prev {
+    grid-column: 1;
+  }
+  .gs .gs-lb__nav--next {
+    grid-column: 2;
+  }
 }
 
 /* ───────── contact ───────── */
@@ -2310,11 +2482,7 @@
   }
 
   .gs .gs-tile--xl .gs-dl--tile .gs-dl__view {
-    aspect-ratio: 2;
-  }
-
-  .gs .gs-tile:last-child {
-    display: none;
+    aspect-ratio: 1;
   }
 
   .gs .gs-tile__over {
@@ -2323,8 +2491,7 @@
   }
 
   .gs .gs-tile__cross,
-  .gs .gs-tile__exif span,
-  .gs .gs-tile__exif a {
+  .gs .gs-tile__exif span {
     display: none;
   }
 

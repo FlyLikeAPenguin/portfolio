@@ -1,6 +1,6 @@
 /**
  * Who Joe is: bio, links, cameras and career timeline.
- * Source: LinkedIn (Oct 2026) plus Joe's update: new role from Oct 2026. Lines marked CHECK still need confirming.
+ * Source: LinkedIn (Oct 2026) plus Joe's update: new role from Oct 2026. Cameras from photo EXIF.
  */
 export const profile = {
   name: 'Joe Thornton',
@@ -20,8 +20,8 @@ export const profile = {
   },
   /** Kit, for the photography section. Mostly digital; film is occasional. */
   cameras: [
-    { name: 'Olympus OM-1', kind: 'Film', detail: '35mm SLR, 1972, for the occasional roll. Zuiko 50mm f/1.8.' }, // CHECK: lens
-    { name: 'Digital', kind: 'Digital', detail: 'Most of what I shoot: streets, travel, the night sky.' }, // CHECK: body
+    { name: 'Sony ZV-E10', kind: 'Digital', detail: 'Most of what I shoot. Sigma 30mm and 56mm f/1.4, Tamron 18–300mm.' },
+    { name: 'Olympus OM-1', kind: 'Film', detail: '35mm SLR from 1972, for the occasional roll.' },
   ],
 }
 
