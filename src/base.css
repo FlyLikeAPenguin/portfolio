@@ -1,4 +1,4 @@
-/* Global reset only. Each concept scopes its own styles under a root class. */
+/* Global reset. Site styles live in src/site/gs.css, scoped under .gs. */
 *,
 *::before,
 *::after {
@@ -31,7 +31,7 @@ html.lenis body {
 }
 
 body {
-  background: #0a0a0a;
+  background: #05070b;
   overflow-x: hidden;
 }
 
@@ -54,12 +54,6 @@ button {
 
 a {
   color: inherit;
-}
-
-.route-loading {
-  position: fixed;
-  inset: 0;
-  background: #0a0a0a;
 }
 
 @media (prefers-reduced-motion: reduce) {

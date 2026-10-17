@@ -1,5 +1,5 @@
 // Screenshot a page at several scroll positions. Dev tooling for checking scroll-driven designs.
-//   node scripts/shoot.mjs --url http://localhost:5173/#/long-exposure --out shots/le \
+//   node scripts/shoot.mjs --url http://localhost:5173/ --out shots/d \
 //     [--stops 0,0.1,0.25,0.5,1] (fractions of scrollable height) [--px 0,900,1800] \
 //     [--w 1440] [--h 900] [--mobile] [--wait 1400] [--intro 2500]
 import { chromium } from 'playwright'

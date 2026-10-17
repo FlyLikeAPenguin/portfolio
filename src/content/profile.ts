@@ -1,15 +1,12 @@
 /**
- * Who Joe is. Shared by every concept, so edit here once.
+ * Who Joe is: bio, links, cameras and career timeline.
  * Source: LinkedIn (Oct 2026) plus Joe's update: new role from Oct 2026. Lines marked CHECK still need confirming.
  */
 export const profile = {
   name: 'Joe Thornton',
-  firstName: 'Joe',
   role: 'Member of Technical Staff',
   location: 'London',
-  /** Short positioning line, used in heroes. */
-  headline: 'I build systems that have to work: AI infrastructure, satellite ground systems, realtime games.',
-  /** Three short lines: the past, the present, life outside work. Some concepts index them. */
+  /** Three short lines: the past, the present, life outside work. The site indexes them. */
   bio: [
     'Software engineer from the UK. Two years in Tokyo at Axelspace on satellite ground systems, finishing as team lead, then AI infrastructure at PolyAI.',
     'Now a member of technical staff at a stealth-mode startup. In my own time I ship party games, developer tools and orbital simulators.',
@@ -21,21 +18,11 @@ export const profile = {
     linkedin: 'https://www.linkedin.com/in/joecthornton/',
     instagram: 'https://www.instagram.com/always_just_joe/',
   },
-  interests: ['Space', 'Photography', 'Reading', 'Musical theatre'],
-  languages: ['English (native)', 'Japanese (elementary)'],
-  /** Kit, for the photography sections. Mostly digital; film is occasional. Keep the OM-1 first: some concepts read cameras[0]. */
+  /** Kit, for the photography section. Mostly digital; film is occasional. */
   cameras: [
     { name: 'Olympus OM-1', kind: 'Film', detail: '35mm SLR, 1972, for the occasional roll. Zuiko 50mm f/1.8.' }, // CHECK: lens
     { name: 'Digital', kind: 'Digital', detail: 'Most of what I shoot: streets, travel, the night sky.' }, // CHECK: body
   ],
-  /** Skills grouped for quick scanning. Keep these keys: concepts read them by name. */
-  stack: {
-    Languages: ['Python', 'TypeScript', 'Go', 'C#', 'Rust'],
-    Frontend: ['React', 'Vue', 'Three.js / CesiumJS', 'GSAP'],
-    Backend: ['Kafka', 'Protobuf / gRPC', 'FastAPI', 'Node', '.NET', 'Postgres'],
-    Infra: ['Kubernetes', 'Terraform', 'Azure', 'AWS', 'Cloudflare', 'Datadog'],
-    AI: ['RAG & vector search', 'LLM serving', 'Agents & tool use'],
-  },
 }
 
 export type TimelineEntry = {
