@@ -1,0 +1,15 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  // Static site on Cloudflare Workers: `pnpm deploy:cf` builds and uploads dist/ to joethornton.dev.
+  "name": "portfolio",
+  "compatibility_date": "2026-10-31",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  },
+  "routes": [
+    { "pattern": "joethornton.dev", "custom_domain": true },
+    { "pattern": "www.joethornton.dev", "custom_domain": true }
+  ],
+  "workers_dev": false
+}

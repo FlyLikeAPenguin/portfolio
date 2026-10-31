@@ -1,6 +1,6 @@
 # Joe Thornton · portfolio
 
-**Live: https://flylikeapenguin.github.io/portfolio/**
+**Live: https://joethornton.dev**
 
 A one-page portfolio styled as a satellite ground station. Scroll flies a satellite around a 3D
 night-side Earth, and each project is a "pass" over a ground station: signal acquired, telemetry
@@ -63,12 +63,15 @@ down the page (add `--mobile` for a phone viewport). Run `npx playwright install
 
 ## Deploying
 
-Every push to `main` builds and deploys to GitHub Pages via `.github/workflows/deploy.yml`
-(Settings → Pages → Source: GitHub Actions). You can also run the *Deploy* workflow by hand.
+```bash
+pnpm deploy:cf    # build, then upload dist/ to Cloudflare (joethornton.dev and www.joethornton.dev)
+```
 
-The build is static with relative paths, so `dist/` also works on any other host or sub-path
-(Cloudflare Pages, Netlify, Vercel: build command `pnpm build`, output `dist`). If the address
-changes, update `og:url`, `og:image` and the canonical link in `index.html`.
+The site is served as static assets by a Cloudflare Worker named `portfolio`, configured in
+`wrangler.jsonc`. It needs a one-off `pnpm exec wrangler login` on a new machine.
+
+Every push to `main` also still builds and deploys a copy to GitHub Pages via
+`.github/workflows/deploy.yml`. The canonical link and `og:` tags in `index.html` point at joethornton.dev.
 
 ## Credits
 
