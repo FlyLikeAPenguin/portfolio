@@ -12,7 +12,11 @@ export const profile = {
     'Now a member of technical staff at a stealth-mode startup. In my own time I ship party games, developer tools and orbital simulators.',
     'Away from the keyboard: space, photography (mostly digital, the odd roll of film on an OM-1), reading and musical theatre.',
   ],
-  email: 'joe.clifford.thornton@gmail.com',
+  /**
+   * hello@joethornton.dev, forwarded to Joe's inbox by Cloudflare Email Routing. Kept base64-encoded
+   * so the address never appears as plain text in the built JavaScript for scrapers to pick up.
+   */
+  email: atob('aGVsbG9Aam9ldGhvcm50b24uZGV2'),
   links: {
     github: 'https://github.com/FlyLikeAPenguin',
     linkedin: 'https://www.linkedin.com/in/joecthornton/',
