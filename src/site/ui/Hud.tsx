@@ -38,6 +38,7 @@ const SOCIAL = [
 ]
 import { S } from '../store'
 import { fmtMET, fmtUTC } from '../fx'
+import { PASSES } from '../plan'
 
 /** Fixed console chrome: clocks along the top, live telemetry down the right edge. */
 export default function Hud() {
@@ -150,7 +151,7 @@ export default function Hud() {
         <div className="gs-hud__row gs-hud__row--pass">
           <span>PASS</span>
           <b data-hud-pass>
-            --<i>/06</i>
+            --<i>/{String(PASSES).padStart(2, '0')}</i>
           </b>
         </div>
         <div className="gs-hud__row">

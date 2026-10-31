@@ -67,6 +67,31 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: 'little-autumn-camper',
+    name: 'The Little Autumn Camper',
+    year: '2026',
+    tier: 'featured',
+    kind: 'Cosy browser game',
+    status: 'Live',
+    oneLiner: 'A cosy autumn road trip in a little camper, with a cat called Bramble.',
+    summary:
+      'Drive between little places, meet the locals and make the camper feel like home: everything you arrange stays exactly where you put it. Plays in any browser, phone included.',
+    role: 'Solo: design and story, built with Codex and Claude Code',
+    stats: [
+      { value: '6', label: 'places to visit' },
+      { value: '214', label: 'art assets' },
+      { value: '12.8k', label: 'lines of TypeScript' },
+      { value: '3', label: 'weeks from first commit to live' },
+    ],
+    stack: ['TypeScript', 'three.js', 'Vite', 'Cloudflare Workers', 'D1'],
+    links: [{ label: 'Play', href: 'https://joethornton.dev/little-autumn-camper/' }],
+    gallery: [
+      { src: 'projects/little-autumn-camper/mosswater.webp', w: 1600, h: 900, alt: 'The Little Autumn Camper: arriving at Mosswater, a lakeside clearing in autumn, with the camper, the traveller, Bramble the cat and Rowan’s stall' },
+      { src: 'projects/little-autumn-camper/camper.webp', w: 1600, h: 900, alt: 'The Little Autumn Camper: inside the camper, with Bramble on the worktop and Pip on the bed' },
+      { src: 'projects/little-autumn-camper/heather-hill.webp', w: 1600, h: 900, alt: 'The Little Autumn Camper: Heather Hill, a stone shelter and a long view over autumn moorland' },
+    ],
+  },
+  {
     slug: 'nitpick',
     name: 'Nitpick',
     year: '2026',

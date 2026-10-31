@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { currentJob, dayJob, previousJob, profile, timeline } from '../../content'
-import { PASS_STATIONS } from '../plan'
+import { PASSES, PASS_STATIONS } from '../plan'
 import { Arrow, ExtLink, PassHeader, Readout, SecHead } from '../ui/bits'
 import { Tags } from './Passes'
 
 const p2 = (n: number) => String(n).padStart(2, '0')
 
-/* ─────────────────────────────── PASS 06 · ground segment (career) ─────────────────────────────── */
+/* ─────────────────────────────── PASS 07 · ground segment (career) ─────────────────────────────── */
 
 const stationCode = (place: string) =>
   ({ UK: 'UK', Sheffield: 'SHF', Tokyo: 'TKY', London: 'LDN' })[place] ?? place.slice(0, 3).toUpperCase()
@@ -18,10 +18,10 @@ export function Ground() {
   const prev = timeline.filter((t) => t.org === dayJob.org)
   const prevDates = prev.length ? `${prev[0].period.split(' – ')[0]} – ${prev[prev.length - 1].period.split(' – ').pop()}` : dayJob.place
   return (
-    <section className="gs-pass gs-pass--ground" id="gs-ground" data-pass="6" data-sec="07" data-sec-label="Pass 06 · Career history" aria-labelledby="gs-ground-h">
+    <section className="gs-pass gs-pass--ground" id="gs-ground" data-pass={PASSES} data-sec="08" data-sec-label={`Pass ${String(PASSES).padStart(2, '0')} · Career history`} aria-labelledby="gs-ground-h">
       <div className="gs-wrap">
         <div data-shot="p6a">
-          <PassHeader sec="07" pass="06" station={PASS_STATIONS[5]} />
+          <PassHeader sec="08" pass={String(PASSES).padStart(2, '0')} station={PASS_STATIONS[PASSES - 1]} />
         </div>
         <div data-shot="p6b">
         <div className="gs-career__head">
@@ -150,9 +150,9 @@ export function Contact() {
     { k: 'Instagram', v: profile.links.instagram.replace(/^https:\/\/(www\.)?/, '').replace(/\/$/, ''), href: profile.links.instagram },
   ]
   return (
-    <section className="gs-contact" id="gs-contact" data-shot="end" data-sec="09" data-sec-label="Uplink · Open a channel" aria-labelledby="gs-contact-h">
+    <section className="gs-contact" id="gs-contact" data-shot="end" data-sec="10" data-sec-label="Uplink · Open a channel" aria-labelledby="gs-contact-h">
       <div className="gs-wrap">
-        <SecHead n="09" aside="Uplink window open">
+        <SecHead n="10" aside="Uplink window open">
           Uplink
         </SecHead>
         <h2 className="gs-contact__h" id="gs-contact-h" data-scr>

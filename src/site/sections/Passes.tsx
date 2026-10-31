@@ -161,12 +161,25 @@ export function PassQuibble() {
   )
 }
 
-/* ─────────────────────────────── PASS 02 · Nitpick ─────────────────────────────── */
+/* ─────────────────────────────── PASS 02 · The Little Autumn Camper ─────────────────────────────── */
+
+export function PassCamper() {
+  const p = bySlug('little-autumn-camper')
+  return (
+    <Pass p={p} n={2} sec="03">
+      {p.gallery.map((g, i) => (
+        <Downlink key={g.src} className="gs-vis__4" src={asset(g.src)} alt={g.alt} frame={frameId(30 + i)} name={file(g.src)} w={g.w} h={g.h} ratio={HD} position={g.pos} seed={31 + i} />
+      ))}
+    </Pass>
+  )
+}
+
+/* ─────────────────────────────── PASS 03 · Nitpick ─────────────────────────────── */
 
 export function PassNitpick() {
   const p = bySlug('nitpick')
   return (
-    <Pass p={p} n={2} sec="03">
+    <Pass p={p} n={3} sec="04">
       <div className="gs-vis__8 gs-panel gs-panel--pipe">
         <div className="gs-panel__head">
           <span>Signal chain</span>
@@ -181,13 +194,13 @@ export function PassNitpick() {
   )
 }
 
-/* ─────────────────────────────── PASS 03 · Satboard ─────────────────────────────── */
+/* ─────────────────────────────── PASS 04 · Satboard ─────────────────────────────── */
 
 export function PassSatboard() {
   const p = bySlug('satboard')
   const shot = p.gallery[0]
   return (
-    <Pass p={p} n={3} sec="04" nod="You’re looking at a cousin of this.">
+    <Pass p={p} n={4} sec="05" nod="You’re looking at a cousin of this.">
       <Downlink className="gs-vis__8" src={asset(shot.src)} alt={shot.alt} frame={frameId(9)} name={file(shot.src)} w={shot.w} h={shot.h} ratio={2.2} seed={5} position={shot.pos} />
       <Downlink className="gs-vis__4" src={asset(shot.src)} alt="" frame={`${frameId(9)} · DETAIL 3×`} name="Orbit tracks" ratio={1.07} seed={6} position="53% 18%" zoom={3} />
       {p.credit ? <p className="gs-credit gs-vis__12">{p.credit}</p> : null}
@@ -195,12 +208,12 @@ export function PassSatboard() {
   )
 }
 
-/* ─────────────────────────────── PASS 04 · Mission Countdown ─────────────────────────────── */
+/* ─────────────────────────────── PASS 05 · Mission Countdown ─────────────────────────────── */
 
 export function PassCountdown() {
   const p = bySlug('mission-countdown')
   return (
-    <Pass p={p} n={4} sec="05">
+    <Pass p={p} n={5} sec="06">
       <div className="gs-vis__12 gs-panel gs-panel--clock" aria-label="Flip clock recreation">
         <FlipClock />
       </div>
@@ -208,12 +221,12 @@ export function PassCountdown() {
   )
 }
 
-/* ─────────────────────────────── PASS 05 · Genki Flashcards ─────────────────────────────── */
+/* ─────────────────────────────── PASS 06 · Genki Flashcards ─────────────────────────────── */
 
 export function PassGenki() {
   const p = bySlug('genki')
   return (
-    <Pass p={p} n={5} sec="06">
+    <Pass p={p} n={6} sec="07">
       {p.gallery.map((g, i) => (
         <Downlink key={g.src} className="gs-vis__6" src={asset(g.src)} alt={g.alt} frame={frameId(12 + i)} name={file(g.src)} w={g.w} h={g.h} ratio={HD} seed={21 + i} />
       ))}

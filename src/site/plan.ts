@@ -6,7 +6,9 @@ import { makeShot, type Shot } from './store'
  * (southbound) branch so the ground flows up the screen with the page. Between passes the
  * satellite goes once around while the Earth turns east to bring the next station round.
  */
-export const PASS_STATIONS = [2, 1, 0, 2, 1, 2] // LDN, TKY, SVB, LDN, TKY, LDN (career: the current station)
+export const PASS_STATIONS = [2, 0, 1, 0, 2, 1, 2] // LDN, SVB, TKY, SVB, LDN, TKY, LDN (career: the current station)
+/** Passes on the page, career included. */
+export const PASSES = PASS_STATIONS.length
 
 const sol = PASS_STATIONS.map((i) => solvePass(STATIONS[i], 'desc'))
 export const U: number[] = []
@@ -68,7 +70,7 @@ export function buildKeys(mobile: boolean): Record<string, Key> {
     A: at(TRANSIT, 'TRANSIT', mobile, U[0] - 34 * DEG, TH[0] - 12 * DEG, U[0] + 8 * DEG),
     B: at(TRANSIT, 'TRANSIT', mobile, U[0] - 22 * DEG, TH[0] - 6 * DEG, U[0] + 2 * DEG),
   }
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < PASSES; i++) {
     const n = i + 1
     k[`p${n}a`] = {
       A: at(AOS, 'AOS', mobile, U[i] - 7 * DEG, TH[i] - 0.6 * DEG, CU[i] - 4 * DEG),
@@ -78,7 +80,7 @@ export function buildKeys(mobile: boolean): Record<string, Key> {
       A: at(PASSBG, 'PASSBG', mobile, U[i] + 2 * DEG, TH[i] + 0.25 * DEG, CU[i] + 1 * DEG),
       B: at(PASSBG, 'PASSBG', mobile, U[i] + 11 * DEG, TH[i] + 1 * DEG, CU[i] + 4 * DEG),
     }
-    if (i < 5) {
+    if (i < PASSES - 1) {
       const u0 = U[i] + 11 * DEG
       const u1 = U[i + 1] - 7 * DEG
       const t0 = TH[i] + 1 * DEG
@@ -92,9 +94,9 @@ export function buildKeys(mobile: boolean): Record<string, Key> {
       }
     }
   }
-  const u6 = U[5]
-  const t6 = TH[5]
-  const c6 = CU[5]
+  const u6 = U[PASSES - 1]
+  const t6 = TH[PASSES - 1]
+  const c6 = CU[PASSES - 1]
   k.opt = {
     A: at(OPTICAL, 'OPTICAL', mobile, u6 + 28 * DEG, t6 + 6 * DEG, c6 + 16 * DEG),
     B: at(OPTICAL, 'OPTICAL', mobile, u6 + 64 * DEG, t6 + 12 * DEG, c6 + 30 * DEG),

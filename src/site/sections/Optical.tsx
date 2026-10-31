@@ -25,9 +25,9 @@ export function Optical() {
   }, [all])
 
   return (
-    <section className="gs-optical" id="gs-optical" data-shot="opt" data-sec="08" data-sec-label="Payload · Optical" aria-labelledby="gs-optical-h">
+    <section className="gs-optical" id="gs-optical" data-shot="opt" data-sec="09" data-sec-label="Payload · Optical" aria-labelledby="gs-optical-h">
       <div className="gs-wrap">
-        <SecHead n="08" aside="Imaging mode">
+        <SecHead n="09" aside="Imaging mode">
           Payload · optical
         </SecHead>
         <div className="gs-optical__head">

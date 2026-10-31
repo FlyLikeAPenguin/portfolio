@@ -11,7 +11,7 @@ import { Suspense, lazy, useEffect, useRef, useState } from 'react'
 import { useGSAP } from '@gsap/react'
 import { useSmoothScroll } from '../lib/useSmoothScroll'
 import { CHARS_ALPHA, ScrollTrigger, SplitText, countUp, gsap, noiseTile, scrambleIn } from './fx'
-import { PASS_STATIONS, blockRange, buildKeys, type Key } from './plan'
+import { PASSES, PASS_STATIONS, blockRange, buildKeys, type Key } from './plan'
 import { STATIONS } from './scene/orbit'
 
 // three.js is the bulk of the bundle: load it after the text so the page reads straight away.
@@ -22,7 +22,7 @@ import Boot from './ui/Boot'
 import Hud from './ui/Hud'
 import Marks from './ui/Marks'
 import Hero from './sections/Hero'
-import { PassCountdown, PassGenki, PassNitpick, PassQuibble, PassSatboard, Transit } from './sections/Passes'
+import { PassCamper, PassCountdown, PassGenki, PassNitpick, PassQuibble, PassSatboard, Transit } from './sections/Passes'
 import { Optical } from './sections/Optical'
 import { Contact, Ground } from './sections/Tail'
 
@@ -204,10 +204,10 @@ export default function GroundStation() {
             if (!self.isActive) return
             if (hudSec) hudSec.textContent = `${sec.dataset.sec} · ${sec.dataset.secLabel ?? ''}`
             const pn = sec.dataset.pass ? Number(sec.dataset.pass) : 0
-            if (pn && hudPass) hudPass.innerHTML = `${p2(pn)}<i>/06</i>`
+            if (pn && hudPass) hudPass.innerHTML = `${p2(pn)}<i>/${p2(PASSES)}</i>`
             if (pn && hudStn) hudStn.textContent = STATIONS[PASS_STATIONS[pn - 1]].id
             if (sec.id === 'gs-hero' && hudPass && hudStn) {
-              hudPass.innerHTML = `--<i>/06</i>`
+              hudPass.innerHTML = `--<i>/${p2(PASSES)}</i>`
               hudStn.textContent = '---'
             }
           },
@@ -312,14 +312,16 @@ export default function GroundStation() {
         <Transit id="t0" next={0} />
         <PassQuibble />
         <Transit id="t1" next={1} />
-        <PassNitpick />
+        <PassCamper />
         <Transit id="t2" next={2} />
-        <PassSatboard />
+        <PassNitpick />
         <Transit id="t3" next={3} />
-        <PassCountdown />
+        <PassSatboard />
         <Transit id="t4" next={4} />
-        <PassGenki />
+        <PassCountdown />
         <Transit id="t5" next={5} />
+        <PassGenki />
+        <Transit id="t6" next={6} />
         <Ground />
         <Optical />
         <Contact />
